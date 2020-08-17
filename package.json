@@ -1,0 +1,12 @@
+{
+  "name": "nodeblockchain",
+  "version": "1.0.0",
+  "description": "simple block chain simulation",
+  "main": "main.js",
+  "author": "msraj085@gmail.com <Solai Raj>",
+  "license": "MIT",
+  "private": false,
+  "dependencies": {
+    "crypto-js": "^4.0.0"
+  }
+}
