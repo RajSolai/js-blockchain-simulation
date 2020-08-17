@@ -1,17 +1,5 @@
-const SHA256 = require("crypto-js/sha256");
-
-class Block {
-	// create block
-	constructor(data, previousHash) {
-		this.data = data;
-		this.previousHash = previousHash;
-		this.hash = this.hashify();
-	}
-	// create fingerprint
-	hashify() {
-		return SHA256(this.data + this.previousHash).toString();
-	}
-}
+const Miner = require("./miner");
+const Block = require("./components/block");
 
 class BlockChain {
 	constructor() {
@@ -31,15 +19,15 @@ class BlockChain {
 	}
 	// get the block chain
 	displayChain() {
-		console.dir(JSON.stringify(this.bChain));
+		console.dir(this.bChain);
 	}
 	// check validity of the chain
 	checkChain() {
-		 for(let i = 1; i < this.bChain.length; i++){
-		 	if(this.bChain[i-1].hash == this.bChain[i].previousHash){
-		 		console.log(`Block Connection ${i-1} to ${i} is Valid`);
-		 	}
-		 }
+		for (let i = 1; i < this.bChain.length; i++) {
+			if (this.bChain[i - 1].hash == this.bChain[i].previousHash) {
+				console.log(`Block Connection ${i - 1} to ${i} is Valid`);
+			}
+		}
 	}
 }
 
@@ -49,6 +37,7 @@ class Main {
 		this.mainFunction();
 		console.log("Displaying the Chain");
 		this.displayChain();
+		new Miner(this.theChain.bChain);
 	}
 	mainFunction() {
 		this.addBlockToChain("first block");
