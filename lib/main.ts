@@ -1,7 +1,7 @@
-const Miner = require("./miner");
-const Block = require("./components/block");
+import Block from "./components/block";
 
 class BlockChain {
+	bChain: any;
 	constructor() {
 		this.bChain = [this.addGenesis()];
 	}
@@ -14,7 +14,7 @@ class BlockChain {
 		return this.bChain[this.bChain.length - 1].hash;
 	}
 	// add new block to chain
-	addBlock(data) {
+	addBlock(data: String) {
 		this.bChain.push(new Block(data, this.getPreviousHash()));
 	}
 	// get the block chain
@@ -32,19 +32,19 @@ class BlockChain {
 }
 
 class Main {
+	theChain: any;
 	constructor() {
 		this.theChain = new BlockChain();
 		this.mainFunction();
 		console.log("Displaying the Chain");
 		this.displayChain();
-		new Miner(this.theChain.bChain);
 	}
 	mainFunction() {
 		this.addBlockToChain("first block");
 		this.addBlockToChain("second block");
 		this.addBlockToChain("third block");
 	}
-	addBlockToChain(data) {
+	addBlockToChain(data: String) {
 		this.theChain.addBlock(data);
 	}
 	displayChain() {
